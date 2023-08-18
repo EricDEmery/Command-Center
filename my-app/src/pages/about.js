@@ -1,8 +1,10 @@
 import Link from "next/link";
+import Navbar from "../components/Navbar";
 
 export default function About() {
     return <div>
       <h1>About</h1>
+      <Navbar />
       <Link href="/dashboard">Dashboard</Link>
       <Link href="/">Home</Link>
       <div classname="container-fluid">
