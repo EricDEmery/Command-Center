@@ -13,8 +13,8 @@ export default function SearchPage() {
   async function fetchData(username) {
     try {
       const response = await axios.get(`${api}?username=${username}`);
-      console.log("Response Data:", response.data); // Add this line
-      setRanks(response.data.ranks); // Use response.data.ranks
+      // console.log("Response Data:", response.data);
+      setRanks(response.data.ranks);
     } catch (error) {
       console.error("Error fetching data:", error);
     }

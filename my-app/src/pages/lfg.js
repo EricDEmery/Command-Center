@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import request from "../services/api.request";
 import { useGlobalState } from '../context/GlobalState.js';
+import Link from "next/link";
 
 const LFG = () => {
   const { state } = useGlobalState();
@@ -45,6 +46,7 @@ const LFG = () => {
   }
 
   return (
+    
     <div className="container mt-5">
       <h1 className="text-center">Looking for Gamers</h1>
       {/* Create a Post form */}
