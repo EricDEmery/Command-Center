@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 
 const api =
-  "https://8000-ericdemery-commandcente-0d2at847xvr.ws-us104.gitpod.io/app/search/";
+  "https://8000-ericdemery-commandcente-zcd9qh1wx6l.ws-us104.gitpod.io/api/search";
 
 export default function SearchPage() {
   const [ranks, setRanks] = useState([]);
