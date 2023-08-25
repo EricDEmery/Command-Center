@@ -17,6 +17,7 @@ class AuthService {
           email,
           password,
           username,
+          
         },
       });
       if (response.data.access) {
@@ -35,7 +36,8 @@ class AuthService {
     password,
     firstName,
     lastName,
-    image
+    image,
+    epic_id
   }) {
     try {
       await request({
@@ -47,7 +49,8 @@ class AuthService {
           password,
           first_name: firstName,
           last_name: lastName,
-          image
+          image,
+          epic_id
         },
       });
       await this.login(email, password, username);
