@@ -32,6 +32,8 @@ export default function SearchPage() {
       <Link href="/dashboard">Dashboard</Link>
       <Link href="/about">about</Link>
       <Link href="/profile">profile</Link>
+      <Link href="/register">register</Link>
+      <Link href="/login">login</Link>
 
       <input
         type="text"
