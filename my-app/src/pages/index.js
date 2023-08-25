@@ -34,6 +34,7 @@ export default function SearchPage() {
       <Link href="/profile">profile</Link>
       <Link href="/register">register</Link>
       <Link href="/login">login</Link>
+      <Link href="/lfg">LFG</Link>
 
       <input
         type="text"
