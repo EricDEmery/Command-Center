@@ -1,64 +1,87 @@
-import Link from "next/link";
-import React, { useState } from "react";
-import Navbar from "../components/Navbar";
-import axios from "axios";
-import { Container, Row, Col } from "react-bootstrap";
+import { useRouter } from 'next/router'; // Correct import
+import React, { useState } from 'react';
+import { useGlobalState } from '../context/GlobalState';
+import authService from '../services/auth.service';
+import jwtDecode from 'jwt-decode';
+import Link from 'next/link';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const api =
-  "https://8000-ericdemery-commandcente-zcd9qh1wx6l.ws-us104.gitpod.io/api/search/";
+function Page() {
+    const router = useRouter();
+    const { state, dispatch } = useGlobalState();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-export default function SearchPage() {
-  const [ranks, setRanks] = useState([]);
+    const handleLogin = (e) => {
+        e.preventDefault();
+        const username = email;
+        authService
+            .login(email, password, username)
+            .then(async (resp) => {
+                console.log(resp);
+                if (resp.access) {
+                    const accessToken = resp.access; // This is the access token
+                    const refreshToken = resp.refresh;
+                    
+                    let data = jwtDecode(resp.access);
+                    await dispatch({
+                        type: 'SET_USER',
+                        payload: data,
+                    });
+                    router.push('/Home'); // Correct route
+                } else {
+                    console.log('Login failed');
+                    dispatch({ type: 'LOGOUT_USER' });
+                }
+            });
+    };
 
-  async function fetchData(username) {
-    try {
-      const response = await axios.get(`${api}?username=${username}`);
-      // console.log("Response Data:", response.data);
-      setRanks(response.data.ranks);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }
-  
-  function handleInput(e) {
-    if (e.key === "Enter") {
-      fetchData(e.target.value);
-    }
-  }
-
-  return (
-    <>
-      <h1>Rocket League Stat Tracker</h1>
-      <Navbar />
-      <Link href="/dashboard">Dashboard</Link>
-      <Link href="/about">About</Link>
-      <Link href="/profile">Profile</Link>
-      <Link href="/register">Register</Link>
-      <Link href="/login">Login</Link>
-      <Link href="/lfg">LFG</Link>
-
-      <input
-        type="text"
-        placeholder="Enter Epic ID"
-        onKeyDown={handleInput}
-      />
-
-      <Container>
-        <Row>
-          {ranks.map((rank, index) => (
-            <Col key={index} md={4}>
-              <div className="border p-3 my-3">
-                <h3>{rank.playlist}</h3>
-                <p>Rank: {rank.rank}</p>
-                <p>Division: {rank.division}</p>
-                <p>MMR: {rank.mmr}</p>
-                <p>Games Played: {rank.played}</p>
-                <p>Streak: {rank.streak}</p>
-              </div>
-            </Col>
-          ))}
-        </Row>
-      </Container>
-    </>
-  );
+    return (
+        <div className="container-fluid d-flex justify-content-center align-items-center vh-100 border">
+            <div className="text-center p-4">
+                <h1>Command Center</h1>
+                <h5 className="text-center">A place for Gamers to connect and track their stats!</h5>
+                <form
+                    onSubmit={handleLogin}
+                    className="mx-auto my-auto border-2 bg-mtgray p-4"
+                >
+                    <div className="mb-3">
+                        <label htmlFor="email" className="form-label">Email</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="email"
+                            name="email"
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="pass" className="form-label">Password</label>
+                        <input
+                            type="password"
+                            className="form-control"
+                            id="pass"
+                            name="password"
+                            minLength="8"
+                            required
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    <div className="d-grid">
+                        <button type="submit" className="btn btn-primary">Sign in</button>
+                    </div>
+                </form>
+                <div className="mt-2">
+                    <span>Don't Have An Account? Register </span>
+                    <Link href="/register">Here</Link>
+                </div>
+            </div>
+        </div>
+    );
+    
+    
+    
 }
+
+export default Page;

@@ -3,6 +3,9 @@ import axios from 'axios';
 import request from "../services/api.request";
 import { useGlobalState } from '../context/GlobalState.js';
 import Link from "next/link";
+import Navbar from '../components/Navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const LFG = () => {
   const { state } = useGlobalState();
@@ -18,6 +21,9 @@ const LFG = () => {
   const fetchPosts = async () => {
     try {
       const response = await axios.get('https://8000-ericdemery-commandcente-zcd9qh1wx6l.ws-us104.gitpod.io/api/posts/');
+      // headers: {
+      //   Authorization: `Bearer ${accessToken}`
+      // }
       setPosts(response.data);
     } catch (error) {
       console.error('Error fetching posts:', error);
@@ -46,7 +52,8 @@ const LFG = () => {
   }
 
   return (
-    
+    <>
+    <Navbar />
     <div className="container mt-5">
       <h1 className="text-center">Looking for Gamers</h1>
       {/* Create a Post form */}
@@ -74,14 +81,16 @@ const LFG = () => {
             <div className="card mb-3" key={post.id}>
               <div className="card-body">
                 <p className="card-text">{post.content}</p>
-                <p className="card-text">Epic ID: {post.epic_id}</p> 
+                <p className="card-text">{post.epic_id}</p> 
               </div>
             </div>
           ))}
         </div>
       </div>
     </div>
+    </>
   );
 };
+
 
 export default LFG;

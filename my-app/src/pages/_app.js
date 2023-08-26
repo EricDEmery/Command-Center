@@ -6,6 +6,5 @@ function MyApp({ Component, pageProps }) {
       <div><Component {...pageProps} /></div>
     </GlobalStateProvider>
   );
-  return ;
 }
 export default MyApp;
