@@ -37,16 +37,19 @@ function Page() {
     };
 
     return (
-        <div className="container-fluid d-flex justify-content-center align-items-center vh-100 border">
+        <>
+        <Link href='Home'>HOME</Link>
+        <div className="container-fluid d-flex justify-content-center align-items-center vh-100 bg-dark text-light">
+        <div className="col-md-6 col-lg-4">
             <div className="text-center p-4">
-                <h1>Command Center</h1>
-                <h5 className="text-center">A place for Gamers to connect and track their stats!</h5>
+                <h1 className="text-warning">Command Center</h1>
+                <h5 className="text-light">A place for Gamers to connect and track their stats!</h5>
                 <form
                     onSubmit={handleLogin}
-                    className="mx-auto my-auto border-2 bg-mtgray p-4"
+                    className="mx-auto my-auto border border-warning bg-secondary p-4 text-start text-light bg-dark"
                 >
                     <div className="mb-3">
-                        <label htmlFor="email" className="form-label">Email</label>
+                        <label htmlFor="email" className="form-label">Email:</label>
                         <input
                             type="text"
                             className="form-control"
@@ -57,7 +60,7 @@ function Page() {
                         />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="pass" className="form-label">Password</label>
+                        <label htmlFor="pass" className="form-label">Password:</label>
                         <input
                             type="password"
                             className="form-control"
@@ -69,18 +72,18 @@ function Page() {
                         />
                     </div>
                     <div className="d-grid">
-                        <button type="submit" className="btn btn-primary">Sign in</button>
+                        <button type="submit" className="btn btn-warning">Sign in</button>
                     </div>
                 </form>
                 <div className="mt-2">
-                    <span>Don't Have An Account? Register </span>
-                    <Link href="/register">Here</Link>
+                    <span className="text-light">Don't Have An Account? Register </span>
+                    <Link href="/register" className="text-warning">Here</Link>
                 </div>
             </div>
         </div>
+        </div>
+        </>
     );
-    
-    
     
 }
 

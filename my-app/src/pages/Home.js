@@ -32,36 +32,34 @@ export default function SearchPage() {
     <>
       <Navbar />
       <Link href="/">Login</Link>
-      <h1>Rocket League Stat Tracker</h1>
-      {/* <Link href="/dashboard">Dashboard</Link>
-      <Link href="/about">About</Link>
-      <Link href="/profile">Profile</Link>
-      <Link href="/register">Register</Link>
-      <Link href="/login">Login</Link>
-      <Link href="/lfg">LFG</Link> */}
+      <div className="container-fluid d-flex justify-content-center align-items-center vh-100 bg-dark text-light">
+        <div className="text-center">
+          <h1 className="text-warning">Rocket League Stat Tracker</h1>
 
-      <input
-        type="text"
-        placeholder="Enter Epic ID"
-        onKeyDown={handleInput}
-      />
+          <input
+            type="text"
+            placeholder="Enter Epic ID"
+            onKeyDown={handleInput}
+          />
 
-      <Container>
-        <Row>
-          {ranks.map((rank, index) => (
-            <Col key={index} md={4}>
-              <div className="border p-3 my-3">
-                <h3>{rank.playlist}</h3>
-                <p>Rank: {rank.rank}</p>
-                <p>Division: {rank.division}</p>
-                <p>MMR: {rank.mmr}</p>
-                <p>Games Played: {rank.played}</p>
-                <p>Streak: {rank.streak}</p>
-              </div>
-            </Col>
-          ))}
-        </Row>
-      </Container>
+          <Container>
+            <Row>
+              {ranks.map((rank, index) => (
+                <Col key={index} md={4}>
+                  <div className="border rounded border-warning p-3 my-3 bg-dark">
+                    <h3 className="text-warning">{rank.playlist}</h3>
+                    <p>Rank: {rank.rank}</p>
+                    <p>Division: {rank.division}</p>
+                    <p>MMR: {rank.mmr}</p>
+                    <p>Games Played: {rank.played}</p>
+                    <p>Streak: {rank.streak}</p>
+                  </div>
+                </Col>
+              ))}
+            </Row>
+          </Container>
+        </div>
+      </div>
     </>
   );
 }
