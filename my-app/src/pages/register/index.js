@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import authService from "../../services/auth.service";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import '/src/pages/css/style.css';
 
 function Register() {
   const router = useRouter();
@@ -30,15 +31,15 @@ console.log(user)
   }
 
   return (
-    <div className="w-screen h-screen">
-      <div>
-        <h1>Register</h1>
+    <div className="w-screen h-screen container-fluid d-flex justify-content-center align-items-center text-center vh-100 bg-dark text-light">
+      <div className="col-md-6 col-lg-4">
+        <h1 className="text-center text-warning">Register</h1>
         <div className="flex">
-          <form className="mx-auto border-2 bg-mtgray" onSubmit={handleRegister}>
+          <form className="mx-auto border border-warning bg-mtgray" onSubmit={handleRegister}>
             <div className="flex justify-between m-2 items-center space-x-2">
               <label htmlFor="firstName">First Name:</label><br />
               <input
-                className="border"
+                className="border form-control"
                 type="text"
                 id="firstName"
                 required
@@ -48,7 +49,7 @@ console.log(user)
             <div className="flex justify-between m-2 items-center space-x-2">
               <label htmlFor="lastName">Last Name:</label><br />
               <input
-                className="border"
+                className="border form-control"
                 type="text"
                 id="lastName"
                 required
@@ -58,7 +59,7 @@ console.log(user)
             <div className="flex justify-between m-2 items-center space-x-2">
               <label htmlFor="email">Email:</label><br />
               <input
-                className="border"
+                className="border form-control"
                 type="text"
                 id="email"
                 required
@@ -68,7 +69,7 @@ console.log(user)
             <div className="flex justify-between m-2 items-center space-x-2">
               <label htmlFor="password">Password:</label><br />
               <input
-                className="border"
+                className="border form-control"
                 type="password"
                 id="password"
                 required
@@ -78,7 +79,7 @@ console.log(user)
             <div className="flex justify-between m-2 items-center space-x-2">
               <label htmlFor="passwordConf">Confirm Password:</label><br />
               <input
-                className="border"
+                className="border form-control"
                 type="password"
                 id="passwordConf"
                 required
@@ -88,16 +89,17 @@ console.log(user)
             <div className="flex justify-between m-2 items-center space-x-2">
               <label htmlFor="epic_id">Epic ID:</label><br />
               <input
-                className="border"
+                className="border form-control"
                 type="text"
                 id="epic_id"
                 required
                 onChange={(e) => handleChange("epic_id", e.target.value)}
               />
             </div>
-            <div className="flex">
+            <div className="d-flex justify-content-center">
               <input
                 type="submit"
+                className="btn btn-warning mb-2"
                 value="Register!"
                 disabled={
                   user.password &&
@@ -113,11 +115,14 @@ console.log(user)
               />
             </div>
           </form>
-          <Link href={`/loginPage`}>Login</Link>
+  
+          <span className="text-light text-center">Already Have An Account? Login </span>
+          <Link href="/" className="text-warning text-center">Here</Link>
         </div>
       </div>
     </div>
   );
+  
 }
 
 export default Register;
