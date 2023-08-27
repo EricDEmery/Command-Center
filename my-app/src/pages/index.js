@@ -4,6 +4,7 @@ import { useGlobalState } from '../context/GlobalState';
 import authService from '../services/auth.service';
 import jwtDecode from 'jwt-decode';
 import Link from 'next/link';
+import { Container, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Page() {
@@ -38,52 +39,53 @@ function Page() {
 
     return (
         <>
-        <Link href='Home'>HOME</Link>
-        <div className="container-fluid d-flex justify-content-center align-items-center vh-100 bg-dark text-light">
-        <div className="col-md-6 col-lg-4">
-            <div className="text-center p-4">
+          <div className="container-fluid d-flex justify-content-center align-items-center vh-100 bg-dark text-light">
+            <div className="col-md-6 col-lg-4">
+              <div className="text-center p-4">
                 <h1 className="text-warning">Command Center</h1>
                 <h5 className="text-light">A place for Gamers to connect and track their stats!</h5>
                 <form
-                    onSubmit={handleLogin}
-                    className="mx-auto my-auto border border-warning bg-secondary p-4 text-start text-light bg-dark"
+                  onSubmit={handleLogin}
+                  className="mx-auto my-auto border border-warning bg-secondary p-4 text-start text-light bg-dark"
                 >
-                    <div className="mb-3">
-                        <label htmlFor="email" className="form-label">Email:</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="email"
-                            name="email"
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="pass" className="form-label">Password:</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            id="pass"
-                            name="password"
-                            minLength="8"
-                            required
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </div>
-                    <div className="d-grid">
-                        <button type="submit" className="btn btn-warning">Sign in</button>
-                    </div>
+                  <div className="mb-3">
+                    <label htmlFor="email" className="form-label">Email:</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="email"
+                      name="email"
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="pass" className="form-label">Password:</label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="pass"
+                      name="password"
+                      minLength="8"
+                      required
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
+                  <div className="d-grid">
+                    <button type="submit" className="btn btn-warning">Sign in</button>
+                  </div>
                 </form>
                 <div className="mt-2">
-                    <span className="text-light">Don't Have An Account? Register </span>
-                    <Link href="/register" className="text-warning">Here</Link>
+                  <span className="text-light">Don't Have An Account? Register </span>
+                  <Link href="/register" className="text-warning">Here</Link>
+                  <span className="text-light"> or </span>
+                  <Link href="/Home" className="text-warning">Continue as a Guest</Link>
                 </div>
+              </div>
             </div>
-        </div>
-        </div>
+          </div>
         </>
-    );
+      );
     
 }
 

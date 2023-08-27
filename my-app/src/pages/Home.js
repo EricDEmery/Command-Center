@@ -4,8 +4,6 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
 
-
-
 const api =
   "https://8000-ericdemery-commandcente-zcd9qh1wx6l.ws-us104.gitpod.io/api/search/";
 
@@ -15,13 +13,12 @@ export default function SearchPage() {
   async function fetchData(username) {
     try {
       const response = await axios.get(`${api}?username=${username}`);
-      // console.log("Response Data:", response.data);
       setRanks(response.data.ranks);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   }
-  
+
   function handleInput(e) {
     if (e.key === "Enter") {
       fetchData(e.target.value);
@@ -31,33 +28,48 @@ export default function SearchPage() {
   return (
     <>
       <Navbar />
-      <Link href="/">Login</Link>
+      
       <div className="container-fluid d-flex justify-content-center align-items-center vh-100 bg-dark text-light">
         <div className="text-center">
           <h1 className="text-warning">Rocket League Stat Tracker</h1>
-
           <input
             type="text"
+            className="form-control mt-3 mb-3"
             placeholder="Enter Epic ID"
             onKeyDown={handleInput}
           />
-
-          <Container>
-            <Row>
-              {ranks.map((rank, index) => (
-                <Col key={index} md={4}>
-                  <div className="border rounded border-warning p-3 my-3 bg-dark">
-                    <h3 className="text-warning">{rank.playlist}</h3>
-                    <p>Rank: {rank.rank}</p>
-                    <p>Division: {rank.division}</p>
-                    <p>MMR: {rank.mmr}</p>
-                    <p>Games Played: {rank.played}</p>
-                    <p>Streak: {rank.streak}</p>
-                  </div>
-                </Col>
-              ))}
-            </Row>
-          </Container>
+          {ranks.length > 0 ? (
+            <Container className="mt-4">
+              <div className="table-responsive">
+                <table className="custom-table table-lg table-bordered border border-warning">
+                  <thead>
+                    <tr>
+                      <th>Playlist</th>
+                      <th>Rank</th>
+                      <th>Division</th>
+                      <th>MMR</th>
+                      <th>Games Played</th>
+                      <th>Streak</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {ranks.map((rank, index) => (
+                      <tr key={index}>
+                        <td className="text-warning">{rank.playlist}</td>
+                        <td>{rank.rank}</td>
+                        <td>{rank.division}</td>
+                        <td>{rank.mmr}</td>
+                        <td>{rank.played}</td>
+                        <td>{rank.streak}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Container>
+          ) : (
+            <p className="mt-4">Using an Epic ID, search for a player's ranks and statistics.</p>
+          )}
         </div>
       </div>
     </>

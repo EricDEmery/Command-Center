@@ -53,41 +53,45 @@ const LFG = () => {
 
   return (
     <>
-    <Navbar />
-    <div className="container mt-5">
-      <h1 className="text-center">Looking for Gamers</h1>
-      {/* Create a Post form */}
-      <div className="row">
-        {/* Other form components */}
-        <form onSubmit={createPost}>
-          {/* Post content input */}
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control"
-              value={newPostText}
-              onChange={(e) => setNewPostText(e.target.value)}
-              placeholder="Enter your post..."
-            />
-          </div>
-          <button type="submit" className="btn btn-primary">Submit Post</button>
-        </form>
-      </div>
-      {/* Display posts */}
-      <div className="row mt-5">
-        <div className="col-md-6 offset-md-3">
-          <h2>Posts</h2>
-          {posts.map(post => (
-            <div className="card mb-3" key={post.id}>
-              <div className="card-body">
-                <p className="card-text">{post.content}</p>
-                <p className="card-text">{post.epic_id}</p> 
+      <Navbar />
+      <div className="container mt-5">
+        <h1 className="text-center text-warning">Looking for Gamers</h1>
+        <div className="row">
+          <div className="col-md-6 offset-md-3">
+            <form onSubmit={createPost}>
+              <div className="input-group mt-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={newPostText}
+                  onChange={(e) => setNewPostText(e.target.value)}
+                  placeholder="Post in this thread to find new teammates..."
+                />
+                </div>
+                <div className="row text-center mt-4">
+                <div className="col">
+                <button type="submit" className="btn btn-warning">
+                  Submit Post
+                </button>
               </div>
-            </div>
-          ))}
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="row mt-2">
+          <div className="col-md-6 offset-md-3">
+            <h2>Posts</h2>
+            {posts.map((post) => (
+              <div className="card mb-3 border border-warning bg-dark" key={post.id}>
+                <div className="card-body">
+                <p className="card-text text-warning">{post.epic_id}</p>
+                <p className="card-text text-light">{post.content}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 };
