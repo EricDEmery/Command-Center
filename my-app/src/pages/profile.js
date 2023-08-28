@@ -49,30 +49,32 @@ export default function DashboardPage() {
         <h1 className="text-warning text-center mt-3 mb-3">Your Stats</h1>
         {userEpicId ? (
           <Container className="mt-4">
-            <Table className="custom-table bg-dark table-lg table-bordered border border-warning" id = 'table'>
-              <thead>
-                <tr>
-                  <th>Playlist</th>
-                  <th>Rank</th>
-                  <th>Division</th>
-                  <th>MMR</th>
-                  <th>Games Played</th>
-                  <th>Streak</th>
-                </tr>
-              </thead>
-              <tbody>
-                {ranks.map((rank, index) => (
-                  <tr key={index}>
-                    <td className="text-warning">{rank.playlist}</td>
-                    <td>{rank.rank}</td>
-                    <td>{rank.division}</td>
-                    <td>{rank.mmr}</td>
-                    <td>{rank.played}</td>
-                    <td>{rank.streak}</td>
+            <div className="table-responsive">
+              <Table className="custom-table bg-dark table table-bordered border border-warning" id="table">
+                <thead>
+                  <tr>
+                    <th>Playlist</th>
+                    <th>Rank</th>
+                    <th>Division</th>
+                    <th>MMR</th>
+                    <th>Games Played</th>
+                    <th>Streak</th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
+                </thead>
+                <tbody>
+                  {ranks.map((rank, index) => (
+                    <tr key={index}>
+                      <td className="text-warning">{rank.playlist}</td>
+                      <td>{rank.rank}</td>
+                      <td>{rank.division}</td>
+                      <td>{rank.mmr}</td>
+                      <td>{rank.played}</td>
+                      <td>{rank.streak}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
           </Container>
         ) : (
           <p className="mt-4">Loading user statistics...</p>
@@ -80,4 +82,6 @@ export default function DashboardPage() {
       </div>
     </>
   );
+  
+  
 }

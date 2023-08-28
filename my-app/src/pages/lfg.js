@@ -3,28 +3,32 @@ import axios from 'axios';
 import { useGlobalState } from '../context/GlobalState.js';
 import Navbar from '../components/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useRouter } from 'next/router'; // Import useRouter
-import authService from "../services/auth.service";
-import authHeader from "../services/auth.headers"; // Import the authHeader function
+import { useRouter } from 'next/router';
+import { Container, Table } from 'react-bootstrap';
+import authHeader from '../services/auth.headers';
 
 const LFG = () => {
   const { state } = useGlobalState();
-  const { user } = state;
-  const router = useRouter(); // Get the router object
+  const router = useRouter();
   const [posts, setPosts] = useState([]);
-  const [newPostText, setNewPostText] = useState('');
+  const [newPostText, setNewPostText] = useState([]);
+
+  const storedUser = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : null;
+  const loggedInUser = storedUser || state.user;
+
+  const user = loggedInUser;
+  const userEpicId = user ? user.epic_id : null;
 
   useEffect(() => {
-    // Check if user is not authenticated and redirect to login
     if (!user) {
-      router.push('/'); // Redirect to the login page
+      router.push('/');
     }
   }, [user, router]);
 
   const fetchPosts = async () => {
     try {
       const response = await axios.get('https://8000-ericdemery-commandcente-zcd9qh1wx6l.ws-us104.gitpod.io/api/posts/', {
-        headers: authHeader(), // Use the authHeader function here
+        headers: authHeader(),
       });
       setPosts(response.data);
     } catch (error) {
@@ -38,24 +42,23 @@ const LFG = () => {
 
   const createPost = async (e) => {
     e.preventDefault();
-    e.target.reset();
     try {
       const postData = {
         content: newPostText,
-        author: user.user_id // Make sure this is correctly retrieved
+        author: user.user_id,
       };
-  
-      await axios.post('/api/posts/', postData, {
-        headers: authHeader(), // Use the authHeader function here
+
+      await axios.post('https://8000-ericdemery-commandcente-zcd9qh1wx6l.ws-us104.gitpod.io/api/create-post/', postData, {
+        headers: authHeader(),
       });
-  
+
       fetchPosts();
       setNewPostText('');
     } catch (error) {
       console.error('Error creating post:', error);
     }
-  }
-  
+    e.target.reset();
+  };
 
   return (
     <>
@@ -103,3 +106,4 @@ const LFG = () => {
 };
 
 export default LFG;
+

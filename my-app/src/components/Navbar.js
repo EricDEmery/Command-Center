@@ -39,7 +39,7 @@ export default function Navbar() {
               <div className="dropdown-menu bg-dark" aria-labelledby="profileDropdown">
                 {user ? (
                   <>
-                    <Link href="/profile" className="dropdown-item text-warning">Dashboard</Link>
+                    <Link href="/profile" className="dropdown-item text-warning pr-5">Dashboard</Link>
                     <button className="dropdown-item text-warning" onClick={handleLogout}>Logout</button>
                   </>
                  ) : (
