@@ -1,15 +1,18 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Table } from "react-bootstrap";
+
+
 
 const api =
   "https://8000-ericdemery-commandcente-zcd9qh1wx6l.ws-us104.gitpod.io/api/search/";
 
 export default function SearchPage() {
-  const [ranks, setRanks] = useState([]);
 
+  const [ranks, setRanks] = useState([]);
+  
   async function fetchData(username) {
     try {
       const response = await axios.get(`${api}?username=${username}`);
@@ -27,7 +30,9 @@ export default function SearchPage() {
 
   return (
     <>
-      <Navbar />
+      <Navbar 
+
+      />
       
       <div className="container-fluid d-flex justify-content-center align-items-center vh-100 bg-dark text-light">
         <div className="text-center">
@@ -40,7 +45,7 @@ export default function SearchPage() {
           />
           {ranks.length > 0 ? (
             <Container className="mt-4">
-              <div className="table-responsive">
+              <div>
                 <table className="custom-table table-lg table-bordered border border-warning">
                   <thead>
                     <tr>

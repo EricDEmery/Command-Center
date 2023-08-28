@@ -4,10 +4,12 @@ import {
   REGISTER_ENDPOINT,
 } from './auth.constants';
 import request from './api.request';
+
 class AuthService {
   constructor() {
     this.login = this.login.bind(this);
   }
+
   async login(email, password, username) {
     try {
       const response = await request({
@@ -17,7 +19,6 @@ class AuthService {
           email,
           password,
           username,
-          
         },
       });
       if (response.data.access) {
@@ -27,9 +28,11 @@ class AuthService {
       return error.response;
     }
   }
+
   logout() {
     localStorage.removeItem('user');
   }
+
   async register({
     username,
     email,
@@ -37,7 +40,7 @@ class AuthService {
     firstName,
     lastName,
     image,
-    epic_id
+    epic_id,
   }) {
     try {
       await request({
@@ -50,7 +53,7 @@ class AuthService {
           first_name: firstName,
           last_name: lastName,
           image,
-          epic_id
+          epic_id,
         },
       });
       await this.login(email, password, username);
@@ -58,14 +61,16 @@ class AuthService {
       return error.response;
     }
   }
+
   setToken(response) {
     localStorage.setItem('user', JSON.stringify(response.data));
     return response.data;
   }
+
   async refreshToken() {
     try {
       const user = JSON.parse(localStorage.getItem('user'));
-      if (user.refresh) {
+      if (user && user.refresh) {
         const response = await request({
           url: REFRESH_ENDPOINT,
           method: 'POST',
@@ -80,4 +85,5 @@ class AuthService {
     }
   }
 }
+
 export default new AuthService();
