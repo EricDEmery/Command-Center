@@ -14,6 +14,7 @@ export default function Navbar() {
     router.push('/Home'); // Redirect to login page after logout
   };
 
+  // hello
   return (
     <nav className="navbar navbar-expand-lg bg-warning">
       <div className="container-fluid">
